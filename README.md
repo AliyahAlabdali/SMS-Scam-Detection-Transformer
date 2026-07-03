@@ -21,12 +21,12 @@
 
 ---
 
-## ✨ TL;DR
+## ✨ Key Points
 
-- 🔬 **No `nn.Transformer`, no shortcuts.** Attention, multi-head attention, and the Pre-LN encoder block are implemented from first principles and covered by **unit tests** (shapes, softmax normalisation, masking, gradient flow).
-- 📊 **Real benchmark, honest evaluation.** Trained on the public **SMS Spam Collection** (5,169 unique messages, ~13% scam) with **stratified splits**, **class-weighted loss**, and **macro-averaged + per-class** metrics, not just accuracy.
-- 🎯 **Strong, generalising results:** **98.07% accuracy**, **0.9542 macro-F1**, only **10 mistakes out of 517** test messages.
-- 🧪 **Portfolio-grade rigour:** EDA, feature engineering, a dry run, best-checkpoint selection, an **ablation study**, error analysis, and a **live inference demo**.
+- **No `nn.Transformer`, no shortcuts.** Attention, multi-head attention, and the Pre-LN encoder block are implemented from first principles and covered by **unit tests** (shapes, softmax normalisation, masking, gradient flow).
+- **Real benchmark, honest evaluation.** Trained on the public **SMS Spam Collection** (5,169 unique messages, ~13% scam) with **stratified splits**, **class-weighted loss**, and **macro-averaged + per-class** metrics, not just accuracy.
+- **Strong, generalising results:** **98.07% accuracy**, **0.9542 macro-F1**, only **10 mistakes out of 517** test messages.
+- **Complete workflow:** EDA, feature engineering, a dry run, best-checkpoint selection, an **ablation study**, error analysis, and a **live inference demo**.
 
 <p align="center">
   <img src="assets/confusion_matrix.png" width="46%" alt="Confusion matrix">
@@ -48,14 +48,14 @@ The full journey, from raw text to a working classifier, lives in a single, well
 
 | | |
 |---|---|
-| 🧱 **From-scratch Transformer** | Scaled dot-product attention → multi-head attention → Pre-LayerNorm encoder block with residual connections and a feed-forward network. |
-| ✅ **Unit-tested core** | Dedicated tests verify tensor shapes, attention normalisation, padding masks, and gradient flow before any training. |
-| 🧹 **Smart preprocessing** | URLs, e-mails, phone numbers, currency and digits are normalised into special tokens (`<url>`, `<phone>`, `<curr>`, `<num>` …) that capture phishing signals. |
-| ⚖️ **Imbalance handled properly** | Stratified 80/10/10 split, inverse-frequency **class weights**, and macro metrics, with no majority-class collapse. |
-| 🛰️ **Positional awareness** | Learned positional embeddings + masked mean-pooling over valid tokens. |
-| 🏆 **Best-checkpoint training** | The epoch with the best **validation macro-F1** is restored automatically, sidestepping late-epoch overfitting. |
-| 🔬 **Ablation study** | 2 vs 4 attention heads under identical settings. |
-| 🔎 **Error analysis + demo** | Confusion matrix, inspection of real misclassified texts, and predictions on brand-new messages. |
+| **From-scratch Transformer** | Scaled dot-product attention → multi-head attention → Pre-LayerNorm encoder block with residual connections and a feed-forward network. |
+| **Unit-tested core** | Dedicated tests verify tensor shapes, attention normalisation, padding masks, and gradient flow before any training. |
+| **Smart preprocessing** | URLs, e-mails, phone numbers, currency and digits are normalised into special tokens (`<url>`, `<phone>`, `<curr>`, `<num>` …) that capture phishing signals. |
+| **Imbalance handled properly** | Stratified 80/10/10 split, inverse-frequency **class weights**, and macro metrics, with no majority-class collapse. |
+| **Positional awareness** | Learned positional embeddings + masked mean-pooling over valid tokens. |
+| **Best-checkpoint training** | The epoch with the best **validation macro-F1** is restored automatically, sidestepping late-epoch overfitting. |
+| **Ablation study** | 2 vs 4 attention heads under identical settings. |
+| **Error analysis + demo** | Confusion matrix, inspection of real misclassified texts, and predictions on brand-new messages. |
 
 ---
 
