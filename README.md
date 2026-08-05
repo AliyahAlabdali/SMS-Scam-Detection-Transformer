@@ -1,4 +1,4 @@
-<h1 align="center">📱🛡️ SMS Scam & Spam Detection with a Transformer Encoder</h1>
+<h1 align="center">SMS Scam & Spam Detection with a Transformer Encoder</h1>
 
 <p align="center">
   <em>A Transformer encoder built <strong>entirely from scratch</strong> in PyTorch (custom scaled dot-product attention, multi-head attention, and encoder block) that flags scam / spam SMS with <strong>98% accuracy</strong> and a <strong>0.95 macro-F1</strong>.</em>
@@ -21,7 +21,7 @@
 
 ---
 
-## ✨ Key Points
+## Key Points
 
 - **No `nn.Transformer`, no shortcuts.** Attention, multi-head attention, and the Pre-LN encoder block are implemented from first principles and covered by **unit tests** (shapes, softmax normalisation, masking, gradient flow).
 - **Real benchmark, honest evaluation.** Trained on the public **SMS Spam Collection** (5,169 unique messages, ~13% scam) with **stratified splits**, **class-weighted loss**, and **macro-averaged + per-class** metrics, not just accuracy.
@@ -29,13 +29,13 @@
 - **Complete workflow:** EDA, feature engineering, a dry run, best-checkpoint selection, an **ablation study**, error analysis, and a **live inference demo**.
 
 <p align="center">
-  <img src="assets/confusion_matrix.png" width="46%" alt="Confusion matrix">
-  <img src="assets/training_loss.png" width="52%" alt="Training vs validation loss">
+  <img src="assets/confusion_matrix.png" width="39%" alt="Confusion matrix">
+  <img src="assets/training_loss.png" width="59%" alt="Training vs validation loss">
 </p>
 
 ---
 
-## 📌 Overview
+## Overview
 
 Scam and phishing messages are rare but costly, so a good detector must find the **minority class** without drowning in false alarms. This project treats that as a binary text-classification task and solves it with a **Transformer encoder written from scratch**, so every part of the attention mechanism is transparent and testable rather than hidden behind a library call.
 
@@ -44,7 +44,7 @@ The full journey, from raw text to a working classifier, lives in a single, well
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
 | | |
 |---|---|
@@ -59,7 +59,7 @@ The full journey, from raw text to a working classifier, lives in a single, well
 
 ---
 
-## 🧠 Architecture
+## Architecture
 
 ```mermaid
 flowchart LR
@@ -79,11 +79,11 @@ flowchart LR
 
 ---
 
-## 🗂️ Dataset
+## Dataset
 
 **SMS Spam Collection**: a public benchmark of real English SMS labelled *ham* (legit) / *spam* (scam).
 
-🔗 **Get the data:** [Kaggle](https://www.kaggle.com/datasets/uciml/sms-spam-collection-dataset) · [UCI ML Repository](https://archive.ics.uci.edu/dataset/228/sms+spam+collection)
+**Get the data:** [Kaggle](https://www.kaggle.com/datasets/uciml/sms-spam-collection-dataset) · [UCI ML Repository](https://archive.ics.uci.edu/dataset/228/sms+spam+collection)
 
 | Property | Value |
 |---|---|
@@ -96,13 +96,13 @@ flowchart LR
 > Duplicates are removed **before** splitting to prevent the same text leaking across train/test, a subtle but important guard for honest metrics.
 
 <p align="center">
-  <img src="assets/class_distribution.png" width="40%" alt="Class distribution">
-  <img src="assets/top_words.png" width="55%" alt="Top words per class">
+  <img src="assets/class_distribution.png" width="32%" alt="Class distribution">
+  <img src="assets/top_words.png" width="62%" alt="Top words per class">
 </p>
 
 ---
 
-## 📈 Results
+## Results
 
 Evaluated on the held-out **test set** (best checkpoint by validation macro-F1):
 
@@ -127,12 +127,13 @@ Evaluated on the held-out **test set** (best checkpoint by validation macro-F1):
   <img src="assets/val_vs_test.png" width="55%" alt="Validation vs test metrics">
 </p>
 
-### 🔎 Error analysis
-Out of **517** test messages, the model makes only **10 errors**: **8 missed scams** (false negatives) and **2 false alarms** (false positives). Macro-precision (0.97) exceeds macro-recall (0.94), so the model is **precise but slightly conservative** on the minority class: the few scams it misses are worded like ordinary messages. If catching every scam matters more, scam recall can be raised by increasing the scam class weight or lowering the decision threshold.
+### Error Analysis
+
+Out of **517** test messages, the model makes only **10 errors**: **8 missed scams** (false negatives) and **2 false alarms** (false positives). Macro-precision (0.97) exceeds macro-recall (0.94), so the model is **precise but slightly conservative** on the minority class. The few scams it misses are worded like ordinary messages. If catching every scam matters more, scam recall can be raised by increasing the scam class weight or lowering the decision threshold.
 
 ---
 
-## 🧪 Ablation Study: Attention Heads (2 vs 4)
+## Ablation Study: Attention Heads (2 vs 4)
 
 Identical settings, only the head count changes:
 
@@ -144,17 +145,19 @@ Identical settings, only the head count changes:
 **Finding:** doubling the heads gives **no measurable benefit** on short SMS texts, so the leaner 2-head model is preferable (same accuracy, less compute).
 
 <p align="center">
-  <img src="assets/ablation_loss.png" width="80%" alt="Ablation loss curves">
+  <img src="assets/ablation_loss.png" width="70%" alt="Ablation loss curves">
 </p>
 
 ---
 
-## ⚡ Getting Started
+## Getting Started
 
 ### Option A: Google Colab (recommended, zero setup)
+
 Click the **Open in Colab** badge at the top, then `Runtime → Change runtime type → T4 GPU` and **Run all**. The dataset downloads automatically.
 
 ### Option B: Run locally
+
 ```bash
 git clone https://github.com/AliyahAlabdali/SMS-Scam-Detection-Transformer.git
 cd SMS-Scam-Detection-Transformer
@@ -166,12 +169,12 @@ Then run the cells top to bottom. Training on CPU works but a GPU is much faster
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
-```
+```text
 .
-├── SMS_Scam_Detection_Transformer.ipynb   # end-to-end notebook (core, EDA, training, evaluation, ablation, demo)
-├── assets/                                 # result figures used in this README
+├── SMS_Scam_Detection_Transformer.ipynb
+├── assets/
 │   ├── class_distribution.png
 │   ├── top_words.png
 │   ├── training_loss.png
@@ -185,10 +188,12 @@ Then run the cells top to bottom. Training on CPU works but a GPU is much faster
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
+
 **PyTorch** (custom Transformer) · **scikit-learn** (metrics & splitting) · **pandas** / **NumPy** (data) · **Matplotlib** (visualisation) · **Jupyter**.
 
-## 🧭 Roadmap / Future Work
+## Roadmap / Future Work
+
 - Sub-word tokenisation (BPE / WordPiece) to shrink the vocabulary and handle typos
 - Stack multiple encoder blocks + a learning-rate scheduler with early stopping
 - Attention-weight visualisation for interpretability
@@ -197,7 +202,8 @@ Then run the cells top to bottom. Training on CPU works but a GPU is much faster
 
 ---
 
-## 🙏 Acknowledgements & Citation
+## Acknowledgements & Citation
+
 Dataset: Almeida, T. A. & Hidalgo, J. M. G. (2011). *SMS Spam Collection.* [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/228/sms+spam+collection) (CC BY 4.0).
 
 <p align="center"><sub>Built with PyTorch and a lot of attention by <strong>Aliyah Alabdali</strong>. ⭐ Star the repo if it helped!</sub></p>
