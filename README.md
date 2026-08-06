@@ -14,6 +14,9 @@
 </p>
 
 <p align="center">
+  <a href="https://huggingface.co/spaces/AliyahAlabdali/sms-scam-detector">
+    <img src="https://img.shields.io/badge/%F0%9F%A4%97%20Live%20Demo-Hugging%20Face-FFD21E" alt="Live Demo on Hugging Face Spaces">
+  </a>
   <a href="https://colab.research.google.com/github/AliyahAlabdali/SMS-Scam-Detection-Transformer/blob/main/SMS_Scam_Detection_Transformer.ipynb">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
   </a>
