@@ -4,13 +4,11 @@
   <em>A Transformer encoder built <strong>entirely from scratch</strong> in PyTorch (custom scaled dot-product attention, multi-head attention, and encoder block) that flags scam / spam SMS with <strong>98% accuracy</strong> and a <strong>0.95 macro-F1</strong>.</em>
 </p>
 
-<p align="center">by <strong>Aliyah Alabdali</strong></p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white" alt="Python">
   <img src="https://img.shields.io/badge/PyTorch-from--scratch-EE4C2C?logo=pytorch&logoColor=white" alt="PyTorch">
   <img src="https://img.shields.io/badge/scikit--learn-metrics-F7931E?logo=scikitlearn&logoColor=white" alt="scikit-learn">
-  <img src="https://img.shields.io/badge/Made%20in-Jupyter-F37626?logo=jupyter&logoColor=white" alt="Jupyter">
 </p>
 
 <p align="center">
