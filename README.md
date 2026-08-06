@@ -38,9 +38,15 @@
 
 ## Demo
 
-<p align="center">
+<!-- <p align="center">
   <video src="assets/scam-detector-demo.mp4" width="85%" controls loop muted autoplay></video>
-</p>
+</p> -->
+
+
+
+https://github.com/user-attachments/assets/4f9d15d5-6c73-4324-81a7-2365b759fe7d
+
+
 
 ---
 
