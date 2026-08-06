@@ -36,6 +36,14 @@
 
 ---
 
+## Demo
+
+<p align="center">
+  <video src="assets/scam-detector-demo.mp4" width="85%" controls loop muted autoplay></video>
+</p>
+
+---
+
 ## Overview
 
 Scam and phishing messages are rare but costly, so a good detector must find the **minority class** without drowning in false alarms. This project treats that as a binary text-classification task and solves it with a **Transformer encoder written from scratch**, so every part of the attention mechanism is transparent and testable rather than hidden behind a library call.
