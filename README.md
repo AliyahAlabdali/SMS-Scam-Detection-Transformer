@@ -4,7 +4,6 @@
   <em>A Transformer encoder built <strong>entirely from scratch</strong> in PyTorch (custom scaled dot-product attention, multi-head attention, and encoder block) that flags scam / spam SMS with <strong>98% accuracy</strong> and a <strong>0.95 macro-F1</strong>.</em>
 </p>
 
-
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white" alt="Python">
   <img src="https://img.shields.io/badge/PyTorch-from--scratch-EE4C2C?logo=pytorch&logoColor=white" alt="PyTorch">
@@ -22,31 +21,22 @@
 
 ---
 
-## Key Points
-
-- **No `nn.Transformer`, no shortcuts.** Attention, multi-head attention, and the Pre-LN encoder block are implemented from first principles and covered by **unit tests** (shapes, softmax normalisation, masking, gradient flow).
-- **Real benchmark, honest evaluation.** Trained on the public **SMS Spam Collection** (5,169 unique messages, ~13% scam) with **stratified splits**, **class-weighted loss**, and **macro-averaged + per-class** metrics, not just accuracy.
-- **Strong, generalising results:** **98.07% accuracy**, **0.9542 macro-F1**, only **10 mistakes out of 517** test messages.
-- **Complete workflow:** EDA, feature engineering, a dry run, best-checkpoint selection, an **ablation study**, error analysis, and a **live inference demo**.
-
-<p align="center">
-  <img src="assets/confusion_matrix.png" width="39%" alt="Confusion matrix">
-  <img src="assets/training_loss.png" width="59%" alt="Training vs validation loss">
-</p>
-
----
-
 ## Demo
 
 <!-- <p align="center">
   <video src="assets/scam-detector-demo.mp4" width="85%" controls loop muted autoplay></video>
 </p> -->
 
-
-
 https://github.com/user-attachments/assets/4f9d15d5-6c73-4324-81a7-2365b759fe7d
 
+---
 
+## Key Points
+
+- **No `nn.Transformer`, no shortcuts.** Attention, multi-head attention, and the Pre-LN encoder block are implemented from first principles and covered by **unit tests** (shapes, softmax normalisation, masking, gradient flow).
+- **Real benchmark, honest evaluation.** Trained on the public **SMS Spam Collection** (5,169 unique messages, ~13% scam) with **stratified splits**, **class-weighted loss**, and **macro-averaged + per-class** metrics, not just accuracy.
+- **Strong, generalising results:** **98.07% accuracy**, **0.9542 macro-F1**, only **10 mistakes out of 517** test messages.
+- **Complete workflow:** EDA, feature engineering, a dry run, best-checkpoint selection, an **ablation study**, error analysis, and a **live inference demo**.
 
 ---
 
@@ -121,6 +111,10 @@ flowchart LR
 
 Evaluated on the held-out **test set** (best checkpoint by validation macro-F1):
 
+<p align="center">
+  <img src="assets/training_loss.png" width="56%" alt="Training vs validation loss">
+</p>
+
 | Metric | Score |
 |:--|:--:|
 | Accuracy | **0.9807** |
@@ -138,11 +132,16 @@ Evaluated on the held-out **test set** (best checkpoint by validation macro-F1):
 <p align="center">
   <img src="assets/val_metrics.png" width="92%" alt="Validation metrics over epochs">
 </p>
+
 <p align="center">
   <img src="assets/val_vs_test.png" width="55%" alt="Validation vs test metrics">
 </p>
 
 ### Error Analysis
+
+<p align="center">
+  <img src="assets/confusion_matrix.png" width="43%" alt="Confusion matrix">
+</p>
 
 Out of **517** test messages, the model makes only **10 errors**: **8 missed scams** (false negatives) and **2 false alarms** (false positives). Macro-precision (0.97) exceeds macro-recall (0.94), so the model is **precise but slightly conservative** on the minority class. The few scams it misses are worded like ordinary messages. If catching every scam matters more, scam recall can be raised by increasing the scam class weight or lowering the decision threshold.
 
@@ -168,18 +167,15 @@ Identical settings, only the head count changes:
 ## Getting Started
 
 ### Option A: Google Colab (recommended, zero setup)
-
 Click the **Open in Colab** badge at the top, then `Runtime → Change runtime type → T4 GPU` and **Run all**. The dataset downloads automatically.
 
 ### Option B: Run locally
-
 ```bash
 git clone https://github.com/AliyahAlabdali/SMS-Scam-Detection-Transformer.git
 cd SMS-Scam-Detection-Transformer
 pip install -r requirements.txt
 jupyter notebook SMS_Scam_Detection_Transformer.ipynb
 ```
-
 Then run the cells top to bottom. Training on CPU works but a GPU is much faster.
 
 ---
