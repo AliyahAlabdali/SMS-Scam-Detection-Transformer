@@ -5,14 +5,14 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/PyTorch-from--scratch-EE4C2C?logo=pytorch&logoColor=white" alt="PyTorch">
-  <img src="https://img.shields.io/badge/scikit--learn-metrics-F7931E?logo=scikitlearn&logoColor=white" alt="scikit-learn">
+  <img src="https://img.shields.io/badge/Python-3.10+-FF69B4?logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/PyTorch-from--scratch-C71585?logo=pytorch&logoColor=white" alt="PyTorch">
+  <img src="https://img.shields.io/badge/scikit--learn-metrics-DB7093?logo=scikitlearn&logoColor=white" alt="scikit-learn">
 </p>
 
 <p align="center">
   <a href="https://huggingface.co/spaces/AliyahAlabdali/sms-scam-detector">
-    <img src="https://img.shields.io/badge/%F0%9F%A4%97%20Live%20Demo-Hugging%20Face-FFD21E" alt="Live Demo on Hugging Face Spaces">
+    <img src="https://img.shields.io/badge/%F0%9F%A4%97%20Live%20Demo-Hugging%20Face-FF1493" alt="Live Demo on Hugging Face Spaces">
   </a>
   <a href="https://colab.research.google.com/github/AliyahAlabdali/SMS-Scam-Detection-Transformer/blob/main/SMS_Scam_Detection_Transformer.ipynb">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
@@ -23,11 +23,9 @@
 
 ## Demo
 
-<!-- <p align="center">
-  <video src="assets/scam-detector-demo.mp4" width="85%" controls loop muted autoplay></video>
-</p> -->
-
-https://github.com/user-attachments/assets/4f9d15d5-6c73-4324-81a7-2365b759fe7d
+<p align="center">
+  <img src="assets/scam-detector-demo.gif" width="85%" alt="SMS Scam Detector demo">
+</p>
 
 ---
 
@@ -55,7 +53,7 @@ The full journey, from raw text to a working classifier, lives in a single, well
 |---|---|
 | **From-scratch Transformer** | Scaled dot-product attention → multi-head attention → Pre-LayerNorm encoder block with residual connections and a feed-forward network. |
 | **Unit-tested core** | Dedicated tests verify tensor shapes, attention normalisation, padding masks, and gradient flow before any training. |
-| **Smart preprocessing** | URLs, e-mails, phone numbers, currency and digits are normalised into special tokens (`<url>`, `<phone>`, `<curr>`, `<num>` …) that capture phishing signals. |
+| **Smart preprocessing** | URLs, e-mails, phone numbers, currency (`£` `$` `€` `⃁`) and digits are normalised into special tokens (`<url>`, `<phone>`, `<curr>`, `<num>` …) that capture phishing signals. |
 | **Imbalance handled properly** | Stratified 80/10/10 split, inverse-frequency **class weights**, and macro metrics, with no majority-class collapse. |
 | **Positional awareness** | Learned positional embeddings + masked mean-pooling over valid tokens. |
 | **Best-checkpoint training** | The epoch with the best **validation macro-F1** is restored automatically, sidestepping late-epoch overfitting. |
@@ -67,14 +65,17 @@ The full journey, from raw text to a working classifier, lives in a single, well
 ## Architecture
 
 ```mermaid
-flowchart LR
-    A["Raw SMS text"] --> B["Normalise<br/>URLs · phones · £/$ · numbers → tokens"]
-    B --> C["Tokenise +<br/>train-only vocabulary"]
-    C --> D["Token +<br/>Positional Embeddings"]
-    D --> E["Transformer Encoder Block<br/>Multi-Head Self-Attention"]
-    E --> F["Masked<br/>Mean Pooling"]
-    F --> G["Linear<br/>Classifier"]
-    G --> H{"legit / scam"}
+flowchart TD
+    A[Raw SMS text] --> B[Normalise URLs, phones, currency and numbers into tokens]
+    B --> C[Tokenise plus train-only vocabulary]
+    C --> D[Token and Positional Embeddings]
+    D --> E[Transformer Encoder Block: Multi-Head Self-Attention]
+    E --> F[Masked Mean Pooling]
+    F --> G[Linear Classifier]
+    G --> H{legit / scam}
+
+    classDef pink fill:#FFB6C1,stroke:#C71585,stroke-width:2px,color:#4a004a;
+    class A,B,C,D,E,F,G,H pink;
 ```
 
 **Inside the encoder block** (Pre-LN):
@@ -186,6 +187,7 @@ Then run the cells top to bottom. Training on CPU works but a GPU is much faster
 .
 ├── SMS_Scam_Detection_Transformer.ipynb
 ├── assets/
+│   ├── scam-detector-demo.gif
 │   ├── class_distribution.png
 │   ├── top_words.png
 │   ├── training_loss.png
